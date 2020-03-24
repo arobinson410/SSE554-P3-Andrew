@@ -45,11 +45,14 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sorting Algorithms\BubbleSort.cs" />
+    <Compile Include="Sorting Algorithms\CombSort.cs" />
     <Compile Include="Sorting Algorithms\HeapSort.cs" />
     <Compile Include="Sorting Algorithms\InsertionSort.cs" />
     <Compile Include="Sorting Algorithms\MergeSort.cs" />
     <Compile Include="Sorting Algorithms\QuickSort.cs" />
     <Compile Include="Sorting Algorithms\SelectionSort.cs" />
+    <Compile Include="Sorting Algorithms\ShellSort.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

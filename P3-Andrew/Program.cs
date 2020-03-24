@@ -17,7 +17,7 @@ namespace P3_Andrew
 
             for(int i = 0; i < 10; i++)
             {
-                list.Add(rand.Next());
+                list.Add(rand.Next()%100);
             }
 
             foreach(int i in list)
