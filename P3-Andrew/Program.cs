@@ -32,6 +32,8 @@ namespace P3_Andrew
                 formatter.Serialize(stream, list);
                 stream.Close();
                 list.Clear();
+
+                toBeGenerated++;
             }
             
 

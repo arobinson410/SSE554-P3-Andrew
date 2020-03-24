@@ -12,7 +12,7 @@ namespace AlgorithmTesting
     {
         StreamWriter file;
 
-        const int DATASIZE = 50000;
+        const int DATASIZE = 5000;
         const int AVERAGEVALUES = 10;
 
         List<int> testList = new List<int>();
@@ -20,8 +20,8 @@ namespace AlgorithmTesting
         [TestInitialize]
         public void PrepTest()
         {
-            file = new StreamWriter("Results.txt", true);
-            file.Write("Results for " + DATASIZE + " at " + AVERAGEVALUES + " iterations || ");
+            file = new StreamWriter("Results.csv", true);
+            file.Write(DATASIZE + ",");
 
             BinaryFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(DATASIZE.ToString(), FileMode.Open, FileAccess.Read);
@@ -64,7 +64,7 @@ namespace AlgorithmTesting
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.WriteLine("Bubble Sort: " + Average(measures));
+            file.Write(Average(measures) + ",");
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
@@ -85,7 +85,7 @@ namespace AlgorithmTesting
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.WriteLine("Comb Sort: " + Average(measures));
+            file.Write(Average(measures) + ",");
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
@@ -106,7 +106,7 @@ namespace AlgorithmTesting
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.WriteLine("Heap Sort: " + Average(measures));
+            file.Write(Average(measures) + ",");
             Debug.WriteLine("Average Runtime: " + Average(measures)); ;
         }
 
@@ -127,7 +127,7 @@ namespace AlgorithmTesting
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.WriteLine("Insertion Sort: " + Average(measures));
+            file.Write(Average(measures) + ",");
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
@@ -148,7 +148,7 @@ namespace AlgorithmTesting
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.WriteLine("Merge Sort: " + Average(measures));
+            file.Write(Average(measures) + ",");
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
@@ -169,7 +169,7 @@ namespace AlgorithmTesting
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.WriteLine("Quick Sort: " + Average(measures));
+            file.Write(Average(measures) + ",");
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
@@ -190,7 +190,7 @@ namespace AlgorithmTesting
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.WriteLine("Selection Sort: " + Average(measures));
+            file.Write(Average(measures) + ",");
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
@@ -211,7 +211,7 @@ namespace AlgorithmTesting
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.WriteLine("Shell Sort: " + Average(measures));
+            file.WriteLine(Average(measures));
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
     }
