@@ -13,36 +13,20 @@ namespace P3_Andrew.Sorting_Algorithms
     public static class HeapSort
     {
 
-        public static bool IsAsync = false;
         /// <summary>
         /// The method that calls the Heap sort
         /// </summary>
         /// <typeparam name="T">Any type derived from IComparable</typeparam>
         /// <param name="l">A list of type T</param>
-        public static async void Sort<T>(List<T> l) where T : IComparable
+        public static void Sort<T>(List<T> l) where T : IComparable
         {
+            for (int i = l.Count / 2 - 1; i >= 0; i--)
+                Heapify(l, i);
 
-            if (IsAsync)
+            for (int i = l.Count - 1; i >= 0; i--)
             {
-                for (int i = l.Count / 2 - 1; i >= 0; i--)
-                    await Heapify(l, i);
-
-                for (int i = l.Count - 1; i >= 0; i--)
-                {
-                    Swap(l, 0, i);
-                    await Heapify(l, i);
-                }
-            }
-            else
-            {
-                for (int i = l.Count / 2 - 1; i >= 0; i--)
-                    Heapify(l, i).RunSynchronously();
-
-                for (int i = l.Count - 1; i >= 0; i--)
-                {
-                    Swap(l, 0, i);
-                    Heapify(l, i).RunSynchronously();
-                }
+                Swap(l, 0, i);
+                Heapify(l, i);
             }
         }
         /// <summary>
@@ -51,7 +35,7 @@ namespace P3_Andrew.Sorting_Algorithms
         /// <typeparam name="T">Any type derived from IComparable</typeparam>
         /// <param name="l">A list of type T</param>
         /// <param name="i">The index to "heapify"</param>
-        private static async Task Heapify<T>(List<T> l, int i) where T : IComparable
+        private static void Heapify<T>(List<T> l, int i) where T : IComparable
         {
             int largest = i;
             int left = 2 * i + 1;
@@ -65,16 +49,10 @@ namespace P3_Andrew.Sorting_Algorithms
 
             if (largest != i)
             {
-                if (IsAsync)
-                {
-                    Swap(l, i, largest);
-                    await Heapify(l, largest);
-                }
-                else
-                {
-                    Swap(l, i, largest);
-                    Heapify(l, largest).RunSynchronously();
-                }
+                Swap(l, i, largest);
+                Heapify(l, largest);
+               
+              
             }
         }
 

@@ -13,13 +13,13 @@ namespace P3_Andrew.Sorting_Algorithms
     public static class MergeSort
     {
 
-        public static bool IsAsync = false;
+
         /// <summary>
         /// The method that calls the merge sort
         /// </summary>
         /// <typeparam name="T">Any type derived from IComparable</typeparam>
         /// <param name="l">A list of type T</param>
-        public static async Task<List<T>> Sort<T>(List<T> l) where T : IComparable
+        public static List<T> Sort<T>(List<T> l) where T : IComparable
         {
             if (l.Count <= 1)
                 return l;
@@ -38,20 +38,12 @@ namespace P3_Andrew.Sorting_Algorithms
                 right.Add(l[i]);
             }
 
-            if (IsAsync) 
-            { 
                     
-                left = await Sort(left);
-                right = await Sort(right);
-                return Merge(left, right);
-            }
-            else
-            {
-
-                left = Sort(left).Result;
-                right = Sort(right).Result;
-                return Merge(left, right);
-            }
+            left = Sort(left);
+            right = Sort(right);
+            return Merge(left, right);
+            
+            
 
 
             

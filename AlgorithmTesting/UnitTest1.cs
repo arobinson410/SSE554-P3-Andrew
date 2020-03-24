@@ -132,22 +132,21 @@ namespace AlgorithmTesting
         }
 
         [TestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
-        public async void MergeSort(bool IsAsync)
+
+        public void MergeSort()
         {
 
             List<int> dataSet = new List<int>(testList);
             long[] measures = new long[AVERAGEVALUES];
 
-            P3_Andrew.Sorting_Algorithms.MergeSort.IsAsync = IsAsync;
+
 
             for (int i = 0; i < AVERAGEVALUES; i++)
             {
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                await P3_Andrew.Sorting_Algorithms.MergeSort.Sort(dataSet);
+                P3_Andrew.Sorting_Algorithms.MergeSort.Sort(dataSet);
 
                 stopwatch.Stop();
                 TimeSpan ts = stopwatch.Elapsed;
@@ -160,7 +159,7 @@ namespace AlgorithmTesting
         }
 
         [TestMethod]
-        public async void QuickSort()
+        public void QuickSort()
         {
             List<int> dataSet = new List<int>(testList);
             long[] measures = new long[AVERAGEVALUES];
@@ -170,7 +169,7 @@ namespace AlgorithmTesting
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                await P3_Andrew.Sorting_Algorithms.QuickSort.Sort(dataSet);
+                P3_Andrew.Sorting_Algorithms.QuickSort.Sort(dataSet);
 
                 stopwatch.Stop();
                 TimeSpan ts = stopwatch.Elapsed;
