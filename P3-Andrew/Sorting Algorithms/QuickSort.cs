@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 namespace P3_Andrew.Sorting_Algorithms
 {
+    /// <summary>
+    /// A class contatining the quick sort algorithm and supporting methods.
+    /// Algorithm adapted from: https://www.w3resource.com/csharp-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-9.php
+    /// </summary>
     public static class QuickSort
     {
-        //Algorithm adapted from: https://www.w3resource.com/csharp-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-9.php
+        /// <summary>
+        /// The method that calls the quick sort
+        /// </summary>
+        /// <typeparam name="T">Any type derived from IComparable</typeparam>
+        /// <param name="l">A list of type T</param>
         public static void Sort<T>(List<T> l, int left = default, int right = default) where T : IComparable
         {
             if (left == default)
@@ -25,7 +33,14 @@ namespace P3_Andrew.Sorting_Algorithms
                 Sort(l, pivot + 1, right);
             }
         }
-
+        /// <summary>
+        /// Finds a point to split the list
+        /// </summary>
+        /// <typeparam name="T">Any type derived from IComparable</typeparam>
+        /// <param name="l">A list of type T</param>
+        /// <param name="left">Left most point to compare</param>
+        /// <param name="right">Right most point to compare</param>
+        /// <returns>A point to split the list</returns>
         private static int Partition<T>(List<T> l, int left, int right) where T : IComparable
         {
             T pivot = l[left];
@@ -55,6 +70,13 @@ namespace P3_Andrew.Sorting_Algorithms
             }
         }
 
+        /// <summary>
+        /// Supporting method to swap to values in a list
+        /// </summary>
+        /// <typeparam name="T">Any type derived from IComparable</typeparam>
+        /// <param name="l">List with values that need to be swapped</param>
+        /// <param name="a">First index to be swapped</param>
+        /// <param name="b">Second index to be swapped</param>
         private static void Swap<T>(List<T> l, int a, int b) where T : IComparable
         {
             T temp = l[a];

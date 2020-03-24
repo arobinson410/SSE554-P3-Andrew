@@ -6,10 +6,17 @@ using System.Threading.Tasks;
 
 namespace P3_Andrew.Sorting_Algorithms
 {
+    /// <summary>
+    /// A class contatining the insertion sort algorithm and supporting methods.
+    /// Algorithm adapted from: https://www.geeksforgeeks.org/insertion-sort/
+    /// </summary>
     public static class InsertionSort
     {
-
-        //Algorithm adapted from: https://www.geeksforgeeks.org/insertion-sort/
+        /// <summary>
+        /// The method that calls the insertion sort
+        /// </summary>
+        /// <typeparam name="T">Any type derived from IComparable</typeparam>
+        /// <param name="l">A list of type T</param>
         public static void Sort<T>(List<T> l) where T : IComparable
         {
             for(int i = 1; i < l.Count; i++)

@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 namespace P3_Andrew.Sorting_Algorithms
 {
+    /// <summary>
+    /// A class contatining the merge sort algorithm and supporting methods.
+    ///Algorithm adapted from: https://www.w3resource.com/csharp-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-7.php
+    /// </summary>
     public static class MergeSort
     {
-        //Algorithm adapted from: https://www.w3resource.com/csharp-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-7.php
+        /// <summary>
+        /// The method that calls the merge sort
+        /// </summary>
+        /// <typeparam name="T">Any type derived from IComparable</typeparam>
+        /// <param name="l">A list of type T</param>
         public static List<T> Sort<T>(List<T> l) where T : IComparable
         {
             if (l.Count <= 1)
@@ -32,7 +40,13 @@ namespace P3_Andrew.Sorting_Algorithms
             right = Sort(right);
             return Merge(left, right);
         }
-
+        /// <summary>
+        /// Combines the two lists, ensuring they are in descending order
+        /// </summary>
+        /// <typeparam name="T">Any type derived from IComparable</typeparam>
+        /// <param name="left">A list of type T</param>
+        /// <param name="right">A list of type T</param>
+        /// <returns>A merged list</returns>
         private static List<T> Merge<T>(List<T> left, List<T> right) where T : IComparable
         {
             List<T> toReturn = new List<T>();

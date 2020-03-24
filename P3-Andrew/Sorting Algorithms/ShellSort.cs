@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 namespace P3_Andrew.Sorting_Algorithms
 {
+    /// <summary>
+    /// A class contatining the shell sort algorithm and supporting methods.
+    /// Algorithm adapted from: https://www.w3resource.com/csharp-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-1.php
+    /// </summary>
     public static class ShellSort
     {
-        //Algorithm adapted from: https://www.w3resource.com/csharp-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-1.php
+        /// <summary>
+        /// The method that calls the shell sort
+        /// </summary>
+        /// <typeparam name="T">Any type derived from IComparable</typeparam>
+        /// <param name="l">A list of type T</param>
         public static void Sort<T>(List<T> l) where T : IComparable
         {
             int inc = 3;
