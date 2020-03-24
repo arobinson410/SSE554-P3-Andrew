@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AlgorithmTesting
@@ -8,162 +10,209 @@ namespace AlgorithmTesting
     [TestClass]
     public class UnitTest1
     {
-        const int DATASIZE = 12500;
+        StreamWriter file;
+
+        const int DATASIZE = 50000;
+        const int AVERAGEVALUES = 10;
 
         List<int> testList = new List<int>();
 
         [TestInitialize]
         public void PrepTest()
         {
-            Random random = new Random();
-            for(int i = 0; i < DATASIZE; i++)
+            file = new StreamWriter("Results.txt", true);
+            file.Write("Results for " + DATASIZE + " at " + AVERAGEVALUES + " iterations || ");
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(DATASIZE.ToString(), FileMode.Open, FileAccess.Read);
+            testList = (List<int>)formatter.Deserialize(stream);
+            stream.Close();
+        }
+
+        [TestCleanup]
+        public void CloseTest()
+        {
+            file.Close();
+        }
+
+        public long Average(long[] l)
+        {
+            long sum = 0;
+            foreach(long val in l)
             {
-                testList.Add(random.Next());
+                sum += val;
             }
+
+            return sum / (long) AVERAGEVALUES;
+
         }
 
         [TestMethod]
         public void BubbleSort()
         {
             List<int> dataSet = new List<int>(testList);
+            long[] measures = new long[AVERAGEVALUES];
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            for (int i = 0; i < AVERAGEVALUES; i++)
+            {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
 
-            P3_Andrew.Sorting_Algorithms.BubbleSort.Sort(dataSet);
+                P3_Andrew.Sorting_Algorithms.BubbleSort.Sort(dataSet);
 
-            stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:0000}",
-                ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds);
-
-            Debug.WriteLine(elapsedTime);
+                stopwatch.Stop();
+                TimeSpan ts = stopwatch.Elapsed;
+                measures[i] = ts.Ticks;
+            }
+            file.WriteLine("Bubble Sort: " + Average(measures));
+            Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
         [TestMethod]
         public void CombSort()
         {
             List<int> dataSet = new List<int>(testList);
+            long[] measures = new long[AVERAGEVALUES];
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            for (int i = 0; i < AVERAGEVALUES; i++)
+            {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
 
-            P3_Andrew.Sorting_Algorithms.CombSort.Sort(dataSet);
+                P3_Andrew.Sorting_Algorithms.CombSort.Sort(dataSet);
 
-            stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:0000}",
-                ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds);
-
-            Debug.WriteLine(elapsedTime);
+                stopwatch.Stop();
+                TimeSpan ts = stopwatch.Elapsed;
+                measures[i] = ts.Ticks;
+            }
+            file.WriteLine("Comb Sort: " + Average(measures));
+            Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
         [TestMethod]
         public void HeapSort()
         {
             List<int> dataSet = new List<int>(testList);
+            long[] measures = new long[AVERAGEVALUES];
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            for (int i = 0; i < AVERAGEVALUES; i++)
+            {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
 
-            P3_Andrew.Sorting_Algorithms.HeapSort.Sort(dataSet);
+                P3_Andrew.Sorting_Algorithms.HeapSort.Sort(dataSet);
 
-            stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:0000}",
-                ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds);
-
-            Debug.WriteLine(elapsedTime);
+                stopwatch.Stop();
+                TimeSpan ts = stopwatch.Elapsed;
+                measures[i] = ts.Ticks;
+            }
+            file.WriteLine("Heap Sort: " + Average(measures));
+            Debug.WriteLine("Average Runtime: " + Average(measures)); ;
         }
 
         [TestMethod]
         public void InsertionSort()
         {
             List<int> dataSet = new List<int>(testList);
+            long[] measures = new long[AVERAGEVALUES];
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            for (int i = 0; i < AVERAGEVALUES; i++)
+            {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
 
-            P3_Andrew.Sorting_Algorithms.InsertionSort.Sort(dataSet);
+                P3_Andrew.Sorting_Algorithms.InsertionSort.Sort(dataSet);
 
-            stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:0000}",
-                ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds);
-
-            Debug.WriteLine(elapsedTime);
+                stopwatch.Stop();
+                TimeSpan ts = stopwatch.Elapsed;
+                measures[i] = ts.Ticks;
+            }
+            file.WriteLine("Insertion Sort: " + Average(measures));
+            Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
         [TestMethod]
         public void MergeSort()
         {
             List<int> dataSet = new List<int>(testList);
+            long[] measures = new long[AVERAGEVALUES];
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            for (int i = 0; i < AVERAGEVALUES; i++)
+            {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
 
-            P3_Andrew.Sorting_Algorithms.MergeSort.Sort(dataSet);
+                P3_Andrew.Sorting_Algorithms.MergeSort.Sort(dataSet);
 
-            stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:0000}",
-                ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds);
-
-            Debug.WriteLine(elapsedTime);
+                stopwatch.Stop();
+                TimeSpan ts = stopwatch.Elapsed;
+                measures[i] = ts.Ticks;
+            }
+            file.WriteLine("Merge Sort: " + Average(measures));
+            Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
         [TestMethod]
         public void QuickSort()
         {
             List<int> dataSet = new List<int>(testList);
+            long[] measures = new long[AVERAGEVALUES];
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            for (int i = 0; i < AVERAGEVALUES; i++)
+            {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
 
-            P3_Andrew.Sorting_Algorithms.QuickSort.Sort(dataSet);
+                P3_Andrew.Sorting_Algorithms.QuickSort.Sort(dataSet);
 
-            stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:0000}",
-                ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds);
-
-            Debug.WriteLine(elapsedTime);
+                stopwatch.Stop();
+                TimeSpan ts = stopwatch.Elapsed;
+                measures[i] = ts.Ticks;
+            }
+            file.WriteLine("Quick Sort: " + Average(measures));
+            Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
         [TestMethod]
         public void SelectionSort()
         {
             List<int> dataSet = new List<int>(testList);
+            long[] measures = new long[AVERAGEVALUES];
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            for (int i = 0; i < AVERAGEVALUES; i++)
+            {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
 
-            P3_Andrew.Sorting_Algorithms.SelectionSort.Sort(dataSet);
+                P3_Andrew.Sorting_Algorithms.SelectionSort.Sort(dataSet);
 
-            stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:0000}",
-                ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds);
-
-            Debug.WriteLine(elapsedTime);
+                stopwatch.Stop();
+                TimeSpan ts = stopwatch.Elapsed;
+                measures[i] = ts.Ticks;
+            }
+            file.WriteLine("Selection Sort: " + Average(measures));
+            Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
         [TestMethod]
         public void ShellSort()
         {
             List<int> dataSet = new List<int>(testList);
+            long[] measures = new long[AVERAGEVALUES];
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            for (int i = 0; i < AVERAGEVALUES; i++)
+            {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
 
-            P3_Andrew.Sorting_Algorithms.ShellSort.Sort(dataSet);
+                P3_Andrew.Sorting_Algorithms.SelectionSort.Sort(dataSet);
 
-            stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:0000}",
-                ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds);
-
-            Debug.WriteLine(elapsedTime);
+                stopwatch.Stop();
+                TimeSpan ts = stopwatch.Elapsed;
+                measures[i] = ts.Ticks;
+            }
+            file.WriteLine("Shell Sort: " + Average(measures));
+            Debug.WriteLine("Average Runtime: " + Average(measures));
         }
     }
 }
