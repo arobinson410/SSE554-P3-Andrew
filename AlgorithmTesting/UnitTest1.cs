@@ -48,6 +48,18 @@ namespace AlgorithmTesting
         }
 
         [TestMethod]
+        public void BigTest()
+        {
+            BubbleSort();
+            CombSort();
+            HeapSort();
+            InsertionSort();
+            MergeSort();
+            QuickSort();
+            SelectionSort();
+            ShellSort();
+        }
+
         public void BubbleSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -68,7 +80,6 @@ namespace AlgorithmTesting
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
-        [TestMethod]
         public void CombSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -89,7 +100,6 @@ namespace AlgorithmTesting
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
-        [TestMethod]
         public void HeapSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -110,7 +120,6 @@ namespace AlgorithmTesting
             Debug.WriteLine("Average Runtime: " + Average(measures)); ;
         }
 
-        [TestMethod]
         public void InsertionSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -131,7 +140,6 @@ namespace AlgorithmTesting
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
-        [TestMethod]
         public void MergeSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -142,7 +150,7 @@ namespace AlgorithmTesting
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                P3_Andrew.Sorting_Algorithms.MergeSort.Sort(dataSet);
+                P3_Andrew.Sorting_Algorithms.MergeSort.Sort(dataSet).RunSynchronously();
 
                 stopwatch.Stop();
                 TimeSpan ts = stopwatch.Elapsed;
@@ -152,7 +160,6 @@ namespace AlgorithmTesting
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
-        [TestMethod]
         public void QuickSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -163,7 +170,7 @@ namespace AlgorithmTesting
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                P3_Andrew.Sorting_Algorithms.QuickSort.Sort(dataSet);
+                P3_Andrew.Sorting_Algorithms.QuickSort.Sort(dataSet).RunSynchronously();
 
                 stopwatch.Stop();
                 TimeSpan ts = stopwatch.Elapsed;
@@ -173,7 +180,6 @@ namespace AlgorithmTesting
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
-        [TestMethod]
         public void SelectionSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -194,7 +200,6 @@ namespace AlgorithmTesting
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
 
-        [TestMethod]
         public void ShellSort()
         {
             List<int> dataSet = new List<int>(testList);
