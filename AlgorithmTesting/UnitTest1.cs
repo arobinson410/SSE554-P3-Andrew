@@ -10,18 +10,14 @@ namespace AlgorithmTesting
     [TestClass]
     public class UnitTest1
     {
-        StreamWriter file;
-
-        const int DATASIZE = 5000;
+        const int DATASIZE = 30000;
         const int AVERAGEVALUES = 10;
 
         List<int> testList = new List<int>();
 
         [TestInitialize]
         public void PrepTest()
-        {
-            file = new StreamWriter("Results.csv", true);
-            file.Write(DATASIZE + ",");
+        { 
 
             BinaryFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(DATASIZE.ToString(), FileMode.Open, FileAccess.Read);
@@ -29,11 +25,6 @@ namespace AlgorithmTesting
             stream.Close();
         }
 
-        [TestCleanup]
-        public void CloseTest()
-        {
-            file.Close();
-        }
 
         public long Average(long[] l)
         {
@@ -44,22 +35,10 @@ namespace AlgorithmTesting
             }
 
             return sum / (long) AVERAGEVALUES;
-
         }
+
 
         [TestMethod]
-        public void BigTest()
-        {
-            BubbleSort();
-            CombSort();
-            HeapSort();
-            InsertionSort();
-            MergeSort();
-            QuickSort();
-            SelectionSort();
-            ShellSort();
-        }
-
         public void BubbleSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -76,10 +55,9 @@ namespace AlgorithmTesting
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.Write(Average(measures) + ",");
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
-
+        [TestMethod]
         public void CombSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -96,10 +74,9 @@ namespace AlgorithmTesting
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.Write(Average(measures) + ",");
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
-
+        [TestMethod]
         public void HeapSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -116,10 +93,9 @@ namespace AlgorithmTesting
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.Write(Average(measures) + ",");
             Debug.WriteLine("Average Runtime: " + Average(measures)); ;
         }
-
+        [TestMethod]
         public void InsertionSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -136,10 +112,9 @@ namespace AlgorithmTesting
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.Write(Average(measures) + ",");
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
-
+        [TestMethod]
         public void MergeSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -150,16 +125,15 @@ namespace AlgorithmTesting
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                P3_Andrew.Sorting_Algorithms.MergeSort.Sort(dataSet).RunSynchronously();
+                P3_Andrew.Sorting_Algorithms.MergeSort.Sort(dataSet);
 
                 stopwatch.Stop();
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.Write(Average(measures) + ",");
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
-
+        
         public void QuickSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -170,16 +144,15 @@ namespace AlgorithmTesting
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                P3_Andrew.Sorting_Algorithms.QuickSort.Sort(dataSet).RunSynchronously();
+                P3_Andrew.Sorting_Algorithms.QuickSort.Sort(dataSet);
 
                 stopwatch.Stop();
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.Write(Average(measures) + ",");
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
-
+        [TestMethod]
         public void SelectionSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -196,10 +169,9 @@ namespace AlgorithmTesting
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.Write(Average(measures) + ",");
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
-
+        [TestMethod]
         public void ShellSort()
         {
             List<int> dataSet = new List<int>(testList);
@@ -216,7 +188,6 @@ namespace AlgorithmTesting
                 TimeSpan ts = stopwatch.Elapsed;
                 measures[i] = ts.Ticks;
             }
-            file.WriteLine(Average(measures));
             Debug.WriteLine("Average Runtime: " + Average(measures));
         }
     }
