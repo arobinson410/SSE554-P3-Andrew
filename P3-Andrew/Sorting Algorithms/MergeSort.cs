@@ -12,12 +12,15 @@ namespace P3_Andrew.Sorting_Algorithms
     /// </summary>
     public static class MergeSort
     {
+
+        public enum AsyncType { NoAsync, SortAsync, MergeAsync, BothAsync };
+        public static bool IsAsync = false;
         /// <summary>
         /// The method that calls the merge sort
         /// </summary>
         /// <typeparam name="T">Any type derived from IComparable</typeparam>
         /// <param name="l">A list of type T</param>
-        public static List<T> Sort<T>(List<T> l) where T : IComparable
+        public static async Task<List<T>> Sort<T>(List<T> l) where T : IComparable
         {
             if (l.Count <= 1)
                 return l;
@@ -36,10 +39,25 @@ namespace P3_Andrew.Sorting_Algorithms
                 right.Add(l[i]);
             }
 
-            left = Sort(left);
-            right = Sort(right);
-            return Merge(left, right);
+            if (IsAsync) 
+            { 
+                    
+                left = await Sort(left);
+                right = await Sort(right);
+                return Merge(left, right).Result;
+            }
+            else
+            {
+
+                left = Sort(left).Result;
+                right = Sort(right).Result;
+                return Merge(left, right).Result;
+            }
+
+
+            
         }
+
         /// <summary>
         /// Combines the two lists, ensuring they are in descending order
         /// </summary>
@@ -47,7 +65,7 @@ namespace P3_Andrew.Sorting_Algorithms
         /// <param name="left">A list of type T</param>
         /// <param name="right">A list of type T</param>
         /// <returns>A merged list</returns>
-        private static List<T> Merge<T>(List<T> left, List<T> right) where T : IComparable
+        private static async Task<List<T>> Merge<T>(List<T> left, List<T> right) where T : IComparable
         {
             List<T> toReturn = new List<T>();
 
