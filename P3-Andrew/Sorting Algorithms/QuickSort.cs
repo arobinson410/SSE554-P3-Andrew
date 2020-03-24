@@ -13,14 +13,12 @@ namespace P3_Andrew.Sorting_Algorithms
     public static class QuickSort
     {
 
-        public static bool SortAsync = false;
-
         /// <summary>
         /// The method that calls the quick sort
         /// </summary>
         /// <typeparam name="T">Any type derived from IComparable</typeparam>
         /// <param name="l">A list of type T</param>
-        public static async Task Sort<T>(List<T> l, int left = default, int right = default) where T : IComparable
+        public static void Sort<T>(List<T> l, int left = default, int right = default) where T : IComparable
         {
             if (left == default)
                 left = 0;
@@ -29,24 +27,14 @@ namespace P3_Andrew.Sorting_Algorithms
 
             int pivot = Partition(l, left, right);
 
-            if (SortAsync)
+            
+            if (pivot > 1)
+                Sort(l, left, pivot - 1);
+            if (pivot + 1 < right)
             {
-                if (pivot > 1)
-                    await Sort(l, left, pivot - 1);
-                if (pivot + 1 < right)
-                {
-                    await Sort(l, pivot + 1, right);
-                }
+                Sort(l, pivot + 1, right);
             }
-            else
-            {
-                if (pivot > 1)
-                    Sort(l, left, pivot - 1);
-                if (pivot + 1 < right)
-                {
-                    Sort(l, pivot + 1, right);
-                }
-            }
+
         }
     
         /// <summary>
