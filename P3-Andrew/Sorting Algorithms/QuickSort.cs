@@ -41,10 +41,10 @@ namespace P3_Andrew.Sorting_Algorithms
             else
             {
                 if (pivot > 1)
-                    Sort(l, left, pivot - 1);
+                    Sort(l, left, pivot - 1).RunSynchronously();
                 if (pivot + 1 < right)
                 {
-                    Sort(l, pivot + 1, right);
+                    Sort(l, pivot + 1, right).RunSynchronously();
                 }
             }
         }

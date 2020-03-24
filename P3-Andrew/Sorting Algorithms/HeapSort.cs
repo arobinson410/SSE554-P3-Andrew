@@ -36,12 +36,12 @@ namespace P3_Andrew.Sorting_Algorithms
             else
             {
                 for (int i = l.Count / 2 - 1; i >= 0; i--)
-                    Heapify(l, i);
+                    Heapify(l, i).RunSynchronously();
 
                 for (int i = l.Count - 1; i >= 0; i--)
                 {
                     Swap(l, 0, i);
-                    Heapify(l, i);
+                    Heapify(l, i).RunSynchronously();
                 }
             }
         }
@@ -73,7 +73,7 @@ namespace P3_Andrew.Sorting_Algorithms
                 else
                 {
                     Swap(l, i, largest);
-                    Heapify(l, largest);
+                    Heapify(l, largest).RunSynchronously();
                 }
             }
         }
